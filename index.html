@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NoCo Foodshed Project — Interactive data visualization dashboard for the Poudre Food Partnership RFSP Final Report. Explore community survey data, producer landscape, pilot program impact, and community action priorities for Northern Colorado's local food system.">
+  <title>NoCo Foodshed Project — Data Visualization Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script src="data.js" defer></script>
+  <script src="charts.js" defer></script>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="navbar__brand">
+      <div class="navbar__brand-icon">🌱</div>
+      NoCo Foodshed Project
+    </a>
+    <ul class="navbar__nav">
+      <li><a href="#snapshot" data-nav>Snapshot</a></li>
+      <li><a href="#community" data-nav>Community</a></li>
+      <li><a href="#producers" data-nav>Producers</a></li>
+      <li><a href="#engagement" data-nav>Engagement</a></li>
+      <li><a href="#impact" data-nav>Impact</a></li>
+      <li><a href="#action-plan" data-nav>Action Plan</a></li>
+    </ul>
+    <div class="navbar__actions">
+      <button class="btn btn--outline btn--sm" onclick="exportToPDF()" id="btnPdf">
+        <span class="btn__icon">📄</span> PDF
+      </button>
+      <button class="btn btn--primary btn--sm" onclick="exportToExcel()" id="btnExcel">
+        <span class="btn__icon">📊</span> Excel
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__badge">
+        🌾 USDA Regional Food Systems Partnership · Final Report Data
+      </div>
+      <h1 class="hero__title">Northern Colorado<br>Food System Dashboard</h1>
+      <p class="hero__subtitle">
+        Visualizing 2 years of community engagement, assessment data, and actionable priorities 
+        from the Poudre Food Partnership — a collaboration of 6 organizations building a more 
+        equitable, vibrant, and resilient local food system.
+      </p>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <div class="hero__stat-value" data-count="313">0</div>
+          <div class="hero__stat-label">Community Survey<br>Responses</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value" data-count="48">0</div>
+          <div class="hero__stat-label">Producer Survey<br>Responses</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value" data-count="6">0</div>
+          <div class="hero__stat-label">Partner<br>Organizations</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value" data-count="4">0</div>
+          <div class="hero__stat-label">Community Action<br>Goals</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main" id="dashboard-content">
+
+    <!-- ============================================
+         SECTION 1: The Problem — Food System Snapshot
+         ============================================ -->
+    <section class="section animate-in" id="snapshot">
+      <div class="section__header">
+        <div class="section__badge section__badge--coral">📉 Section 1</div>
+        <h2 class="section__title">The Problem: Northern Colorado's Food System</h2>
+        <p class="section__subtitle">
+          Despite rapid population growth, Northern Colorado's local food economy remains stagnant — 
+          with declining direct-to-consumer sales and only 1% of agricultural receipts staying local, 
+          far below comparable counties nationwide.
+        </p>
+      </div>
+
+      <!-- KPI row -->
+      <div class="kpi-row kpi-row--4" style="margin-bottom: var(--space-xl);">
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📉</div>
+          <div class="kpi-card__value">$1.5M</div>
+          <div class="kpi-card__label">Local Food Sales (2017)</div>
+          <div class="kpi-card__sublabel">Down from $1.8M in 2012</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📊</div>
+          <div class="kpi-card__value">1%</div>
+          <div class="kpi-card__label">Local Ag Receipts</div>
+          <div class="kpi-card__sublabel">Comparable counties: 5–20%+</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📈</div>
+          <div class="kpi-card__value">+30K</div>
+          <div class="kpi-card__label">Population Growth</div>
+          <div class="kpi-card__sublabel">Since 2010 in Fort Collins</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">⚠️</div>
+          <div class="kpi-card__value kpi-card__value--amber">1 in 3</div>
+          <div class="kpi-card__label">Coloradans Lack</div>
+          <div class="kpi-card__sublabel">Reliable food access</div>
+        </div>
+      </div>
+
+      <div class="chart-grid chart-grid--2">
+        <!-- Local Food Sales Decline -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Local Food Sales Decline</div>
+              <div class="chart-card__description">Value of food sold directly to consumers in Larimer County dropped 17%</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartSalesDecline" height="260"></canvas>
+          </div>
+          <div class="chart-card__source">Source: USDA National Agricultural Statistics Service, 2012–2017</div>
+        </div>
+
+        <!-- Local vs National Comparison -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Larimer County vs. Comparable Counties</div>
+              <div class="chart-card__description">Local agricultural receipts as % of total — Larimer County trails far behind</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartLocalVsNational" height="260"></canvas>
+          </div>
+          <div class="chart-card__source">Source: USDA NASS — counties with similar population & economic drivers</div>
+        </div>
+      </div>
+
+      <!-- Vision statement -->
+      <div class="stat-highlight" style="margin-top: var(--space-xl);">
+        <div class="stat-highlight__icon">🎯</div>
+        <div class="stat-highlight__content">
+          <div class="stat-highlight__value">Goal: 10% of local agricultural products marketed locally by 2027</div>
+          <div class="stat-highlight__text">
+            The NoCo Foodshed Project's vision — a 10x increase from the current 1%. Achieving this requires 
+            comprehensive growth across demand stimulation, infrastructure, organizational capacity, and production.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 2: Community Voice — Survey (n=313)
+         ============================================ -->
+    <section class="section animate-in" id="community">
+      <div class="section__header">
+        <div class="section__badge section__badge--green">🗣️ Section 2</div>
+        <h2 class="section__title">Community Voice: What 313 Residents Told Us</h2>
+        <p class="section__subtitle">
+          A bilingual (English/Spanish) community survey gathered insights on food priorities, 
+          shopping habits, and barriers — revealing a significant gap between community values 
+          and purchasing power.
+        </p>
+      </div>
+
+      <!-- Key themes -->
+      <div class="theme-cards" style="margin-bottom: var(--space-2xl);">
+        <div class="theme-card">
+          <div class="theme-card__icon">👷</div>
+          <div class="theme-card__title">Working Conditions</div>
+          <div class="theme-card__detail">Desire to learn about wages & conditions but difficulty finding information</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-card__icon">💰</div>
+          <div class="theme-card__title">Income & Food Access</div>
+          <div class="theme-card__detail">Statistically significant relationship between income and food sources</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-card__icon">🏷️</div>
+          <div class="theme-card__title">Food Labels</div>
+          <div class="theme-card__detail">75% want more information — preferring humane, labor & water labels</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-card__icon">⚖️</div>
+          <div class="theme-card__title">Affordability Gap</div>
+          <div class="theme-card__detail">81% prioritize social justice but 49% can't afford to pay more</div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-card__icon">🌎</div>
+          <div class="theme-card__title">Values Over "Local"</div>
+          <div class="theme-card__detail">Fair pay, sustainability & cultural foods valued over "locally produced"</div>
+        </div>
+      </div>
+
+      <div class="chart-grid chart-grid--2">
+        <!-- Community Priorities -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Community Food System Priorities</div>
+              <div class="chart-card__description">What matters most — "locally produced" ranked lowest</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartPriorities" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment (n=313)</div>
+        </div>
+
+        <!-- Affordability Gap -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">The Affordability Gap</div>
+              <div class="chart-card__description">Values vs. purchasing power — a critical disconnect</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartAffordability" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment (n=313)</div>
+        </div>
+
+        <!-- Shopping by Income -->
+        <div class="chart-card chart-card--wide">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Where People Shop — By Income Level</div>
+              <div class="chart-card__description">
+                Lower-income residents rely on big-box stores, convenience stores & food banks. 
+                Higher-income residents are more likely to shop at farmers markets & CSAs.
+              </div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartShoppingIncome" height="320"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment — statistically significant relationship (n=313)</div>
+        </div>
+
+        <!-- Label Interest -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Food Label Interest</div>
+              <div class="chart-card__description">What consumers want to see on labels — humane treatment tops organic & local</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartLabels" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment (n=313)</div>
+        </div>
+
+        <!-- Farmers Market Barriers -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Farmers Market Barriers</div>
+              <div class="chart-card__description">1 in 3 respondents don't visit or don't feel welcome at farmers markets</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartFMBarriers" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment (n=313)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 3: Producer Landscape (n=48)
+         ============================================ -->
+    <section class="section animate-in" id="producers">
+      <div class="section__header">
+        <div class="section__badge section__badge--amber">🌾 Section 3</div>
+        <h2 class="section__title">Producer Landscape: Challenges & Needs</h2>
+        <p class="section__subtitle">
+          A survey of 48 farmers, ranchers, and aspiring producers revealed critical barriers 
+          in land access, water, marketing, and infrastructure — with business development 
+          support ranked higher than production training.
+        </p>
+      </div>
+
+      <!-- Demographics summary -->
+      <div class="kpi-row kpi-row--5" style="margin-bottom: var(--space-xl);">
+        <div class="kpi-card">
+          <div class="kpi-card__icon">👩‍🌾</div>
+          <div class="kpi-card__value">65%</div>
+          <div class="kpi-card__label">Female</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📅</div>
+          <div class="kpi-card__value">78%</div>
+          <div class="kpi-card__label">Age 25–45</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">🎓</div>
+          <div class="kpi-card__value">78%</div>
+          <div class="kpi-card__label">Bachelor's+</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">🏡</div>
+          <div class="kpi-card__value">86%</div>
+          <div class="kpi-card__label">White</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📍</div>
+          <div class="kpi-card__value">35%</div>
+          <div class="kpi-card__label">ZIP 80524</div>
+        </div>
+      </div>
+
+      <div class="chart-grid chart-grid--2">
+        <!-- Top Barriers -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Top Barriers for Producers</div>
+              <div class="chart-card__description">Business development needs outrank production practices</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartProducerBarriers" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+
+        <!-- Water Access -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Water Access Sources</div>
+              <div class="chart-card__description">33% rely on costly municipal water — 65% lack water storage</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartWaterAccess" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+
+        <!-- Land Tenure -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Land Tenure & Lease Challenges</div>
+              <div class="chart-card__description">70% of lessees have single-year leases — creating instability</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartLandTenure" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+
+        <!-- Market Channels -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Market Channels</div>
+              <div class="chart-card__description">Only 13% of sales reach distributors & institutions — a growth opportunity</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartMarketChannels" height="300"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+
+        <!-- Infrastructure Needs -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Infrastructure Importance</div>
+              <div class="chart-card__description">Storage (84%) and processing (79%) are critical — food hub less so (38%)</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartInfrastructure" height="260"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+
+        <!-- Aspiring Producer Barriers -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Aspiring vs. Current Producer Barriers</div>
+              <div class="chart-card__description">Land & water access is the #1 barrier for starting and sustaining farms</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartAspiringBarriers" height="260"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 4: Community Engagement
+         ============================================ -->
+    <section class="section animate-in" id="engagement">
+      <div class="section__header">
+        <div class="section__badge section__badge--blue">🤝 Section 4</div>
+        <h2 class="section__title">Community Engagement & Collaboration</h2>
+        <p class="section__subtitle">
+          The Poudre Food Partnership brought together 6 organizations, hosted 15+ events, 
+          formed 4 bilingual working groups, and reached hundreds of community members 
+          through assessments, focus groups, and digital outreach.
+        </p>
+      </div>
+
+      <!-- Partner Network -->
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #1B4332, #40916C);">FSP</div>
+          <div class="partner-card__name">NoCo Foodshed Project</div>
+          <div class="partner-card__role">Lead Organization</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #059669, #34D399);">TGP</div>
+          <div class="partner-card__name">The Growing Project</div>
+          <div class="partner-card__role">Food & Social Justice</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #D97706, #FBBF24);">TFC</div>
+          <div class="partner-card__name">La Familia / Family Center</div>
+          <div class="partner-card__role">Community Access</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">RK</div>
+          <div class="partner-card__name">ReKaivery</div>
+          <div class="partner-card__role">Market Innovation</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">PVCF</div>
+          <div class="partner-card__name">Poudre Valley Community Farms</div>
+          <div class="partner-card__role">Land & Water Access</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card__abbr" style="background: linear-gradient(135deg, #DC2626, #F87171);">CSU</div>
+          <div class="partner-card__name">CSU Extension</div>
+          <div class="partner-card__role">Technical Assistance</div>
+        </div>
+      </div>
+
+      <!-- Engagement KPIs -->
+      <div class="kpi-row kpi-row--4" style="margin-bottom: var(--space-xl);">
+        <div class="kpi-card">
+          <div class="kpi-card__icon">📅</div>
+          <div class="kpi-card__value">15</div>
+          <div class="kpi-card__label">Public Events</div>
+          <div class="kpi-card__sublabel">200+ total attendees</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">👥</div>
+          <div class="kpi-card__value">30</div>
+          <div class="kpi-card__label">Working Group Members</div>
+          <div class="kpi-card__sublabel">Selected from 44 applicants</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">🗓️</div>
+          <div class="kpi-card__value">36</div>
+          <div class="kpi-card__label">WG Meetings Held</div>
+          <div class="kpi-card__sublabel">1.5 hours each, bilingual</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__icon">🌐</div>
+          <div class="kpi-card__value">2,600</div>
+          <div class="kpi-card__label">Website Engagements</div>
+          <div class="kpi-card__sublabel">144 avg monthly visits</div>
+        </div>
+      </div>
+
+      <div class="chart-grid chart-grid--2">
+        <!-- Event Breakdown -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Event Series Breakdown</div>
+              <div class="chart-card__description">Three event types with 24% overall return rate</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartEvents" height="280"></canvas>
+          </div>
+          <div class="chart-card__source">Source: Poudre Food Partnership event records, 2022–2023</div>
+        </div>
+
+        <!-- Assessment Reach -->
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Total Assessment & Outreach Reach</div>
+              <div class="chart-card__description">Diverse engagement methods across stakeholder groups</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartAssessmentReach" height="280"></canvas>
+          </div>
+          <div class="chart-card__source">Source: Poudre Food Partnership compiled data, 2022–2023</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 5: Pilot Programs — Measurable Impact
+         ============================================ -->
+    <section class="section animate-in" id="impact">
+      <div class="section__header">
+        <div class="section__badge section__badge--teal">🚀 Section 5</div>
+        <h2 class="section__title">Pilot Programs: Measurable Impact</h2>
+        <p class="section__subtitle">
+          The planning process didn't just produce a report — it launched pilot programs 
+          that demonstrate real-world impact, diverting food to those in need, creating 
+          new market channels, and building collaborative infrastructure.
+        </p>
+      </div>
+
+      <!-- Impact Cards -->
+      <div class="impact-grid">
+        <!-- Veg Out -->
+        <div class="impact-card">
+          <div class="impact-card__title">🥦 Veg Out Program</div>
+          <div class="impact-card__period">May – October 2023 · Food Bank for Larimer County</div>
+          <div class="impact-card__metrics">
+            <div class="impact-metric">
+              <div class="impact-metric__value">14,514</div>
+              <div class="impact-metric__label">Pounds of local produce diverted</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">$84,061</div>
+              <div class="impact-metric__label">Paid to local producers</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">6</div>
+              <div class="impact-metric__label">New producers recruited</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">37,000</div>
+              <div class="impact-metric__label">Food Bank clients served</div>
+            </div>
+          </div>
+          <div class="impact-card__quote">
+            "This program has been an absolute game changer for our farm. Veg Out is supporting 
+            local farms, reducing food waste and delivering high quality, fresh food to communities 
+            in need. It's a model that should be replicated throughout the state."
+            <span class="impact-card__quote-author">— Gwen Cameron, Rancho Durazno</span>
+          </div>
+        </div>
+
+        <!-- Poudre Valley Producers -->
+        <div class="impact-card">
+          <div class="impact-card__title">🧀 Poudre Valley Producers (Farmers' Pick)</div>
+          <div class="impact-card__period">May – October 2023 · Morning Fresh Dairy Partnership</div>
+          <div class="impact-card__metrics">
+            <div class="impact-metric">
+              <div class="impact-metric__value">$15K+</div>
+              <div class="impact-metric__label">Sales to Morning Fresh</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">$11.4K+</div>
+              <div class="impact-metric__label">Revenue to 3 farm businesses</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">60</div>
+              <div class="impact-metric__label">Boxes per week</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">7,000+</div>
+              <div class="impact-metric__label">Customer base reached</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ReKaivery -->
+        <div class="impact-card">
+          <div class="impact-card__title">🏪 ReKaivery Food Hub</div>
+          <div class="impact-card__period">14 months of operation · Consignment Model</div>
+          <div class="impact-card__metrics">
+            <div class="impact-metric">
+              <div class="impact-metric__value">$142K+</div>
+              <div class="impact-metric__label">Injected into local economy</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">6,606</div>
+              <div class="impact-metric__label">Customer transactions</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">40+</div>
+              <div class="impact-metric__label">Vendors supported</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">14</div>
+              <div class="impact-metric__label">Months operating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sugar Beet -->
+        <div class="impact-card">
+          <div class="impact-card__title">📰 Sugar Beet Newsletter</div>
+          <div class="impact-card__period">10 months · Substack Platform</div>
+          <div class="impact-card__metrics">
+            <div class="impact-metric">
+              <div class="impact-metric__value">82</div>
+              <div class="impact-metric__label">Subscribers</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">746</div>
+              <div class="impact-metric__label">Total reads</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">~9.1</div>
+              <div class="impact-metric__label">Reads per subscriber</div>
+            </div>
+            <div class="impact-metric">
+              <div class="impact-metric__value">10</div>
+              <div class="impact-metric__label">Months of content</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combined Impact Summary -->
+      <div class="stat-highlight" style="margin-top: var(--space-xl);">
+        <div class="stat-highlight__icon">💰</div>
+        <div class="stat-highlight__content">
+          <div class="stat-highlight__value">$252,913+ Total Economic Impact Across All Pilot Programs</div>
+          <div class="stat-highlight__text">
+            Combined from Veg Out ($84,061), Poudre Valley Producers ($26,400+), and ReKaivery ($142,452) — 
+            demonstrating that coordinated local food system development generates real economic value for 
+            producers and community members alike.
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-grid chart-grid--2" style="margin-top: var(--space-xl);">
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Pilot Program Revenue Comparison</div>
+              <div class="chart-card__description">Economic impact generated by each pilot program</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartPilotRevenue" height="280"></canvas>
+          </div>
+          <div class="chart-card__source">Source: Poudre Food Partnership pilot program data, 2023</div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Veg Out: Food Diversion Impact</div>
+              <div class="chart-card__description">14,514 pounds of produce saved from waste and redirected to food bank clients</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartVegOutImpact" height="280"></canvas>
+          </div>
+          <div class="chart-card__source">Source: Veg Out Program records, May–Oct 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 6: Community Action Priorities
+         ============================================ -->
+    <section class="section animate-in" id="action-plan">
+      <div class="section__header">
+        <div class="section__badge section__badge--purple">🎯 Section 6</div>
+        <h2 class="section__title">2023 Community Action Priorities</h2>
+        <p class="section__subtitle">
+          Four strategic goals with specific actions and tactics — synthesized from 
+          community surveys, producer assessments, working groups, and focus groups. 
+          This action plan is the roadmap for the next phase of implementation.
+        </p>
+      </div>
+
+      <!-- Three Pillars -->
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-card__icon">🤲</div>
+          <div class="pillar-card__title">Food Sovereignty & Access</div>
+          <div class="pillar-card__desc">Equitable food system prioritizing community health and equal rights for all</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card__icon">🗣️</div>
+          <div class="pillar-card__title">Community Outreach & Education</div>
+          <div class="pillar-card__desc">Inclusive strategies to educate and engage the community</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card__icon">🌱</div>
+          <div class="pillar-card__title">Production Growth & Land Access</div>
+          <div class="pillar-card__desc">Support production growth, land tenure, and market access</div>
+        </div>
+      </div>
+
+      <!-- Goal Cards -->
+      <div class="goal-cards">
+        <div class="goal-card goal-card--1">
+          <div class="goal-card__number">Goal #1</div>
+          <div class="goal-card__icon">✊</div>
+          <div class="goal-card__title">Elevate & Empower the Voices of Marginalized People & Groups</div>
+          <ul class="goal-card__actions">
+            <li class="goal-card__action">Implement a Food Equity & Policy Council for Northern Colorado</li>
+            <li class="goal-card__action">Facilitate buy-in from local municipalities & stakeholders</li>
+            <li class="goal-card__action">Long-term organizational support to sustain engagement (5+ years)</li>
+          </ul>
+          <div class="goal-card__pillar">🤲 Food Sovereignty & Access</div>
+        </div>
+
+        <div class="goal-card goal-card--2">
+          <div class="goal-card__number">Goal #2</div>
+          <div class="goal-card__icon">🥬</div>
+          <div class="goal-card__title">Increase Access to Local Foods Among All Community Members</div>
+          <ul class="goal-card__actions">
+            <li class="goal-card__action">Increase SNAP/WIC/Double Up Food Buck outlets</li>
+            <li class="goal-card__action">Expand cooperation with big box stores & local retailers</li>
+            <li class="goal-card__action">Develop novel market strategies (mobile markets, food hubs)</li>
+          </ul>
+          <div class="goal-card__pillar">🤲 🗣️ Food Sovereignty + Outreach</div>
+        </div>
+
+        <div class="goal-card goal-card--3">
+          <div class="goal-card__number">Goal #3</div>
+          <div class="goal-card__icon">📚</div>
+          <div class="goal-card__title">Increase Consumer Education & Awareness of the Local Food Economy</div>
+          <ul class="goal-card__actions">
+            <li class="goal-card__action">Food curriculum development in local schools & afterschool programs</li>
+            <li class="goal-card__action">Tell the stories of local producers in engaging, humanizing formats</li>
+            <li class="goal-card__action">Create program awareness campaigns & local resource guides</li>
+          </ul>
+          <div class="goal-card__pillar">🗣️ Community Outreach & Education</div>
+        </div>
+
+        <div class="goal-card goal-card--4">
+          <div class="goal-card__number">Goal #4</div>
+          <div class="goal-card__icon">🌾</div>
+          <div class="goal-card__title">Support Diverse Local Producers at All Business Stages</div>
+          <ul class="goal-card__actions">
+            <li class="goal-card__action">Hands-on educational opportunities & mentoring networks</li>
+            <li class="goal-card__action">Develop shared processing, storage & distribution infrastructure</li>
+            <li class="goal-card__action">Increase land & water availability for young, beginning & diverse producers</li>
+          </ul>
+          <div class="goal-card__pillar">🌱 Production Growth & Land Access</div>
+        </div>
+      </div>
+
+      <!-- Goal alignment chart -->
+      <div class="chart-grid chart-grid--1" style="margin-top: var(--space-xl);">
+        <div class="chart-card chart-card--full">
+          <div class="chart-card__header">
+            <div>
+              <div class="chart-card__title">Goals ↔ Pillar Alignment Matrix</div>
+              <div class="chart-card__description">How each goal maps to the three strategic pillars</div>
+            </div>
+          </div>
+          <div class="chart-card__canvas-wrapper">
+            <canvas id="chartGoalAlignment" height="220"></canvas>
+          </div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Action Priorities — Poudre Food Partnership</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__title">NoCo Foodshed Project · Poudre Food Partnership</div>
+      <p class="footer__text">
+        Building a more equitable, vibrant, and resilient local food system in Northern Colorado.<br>
+        Data sourced from the USDA Regional Food Systems Partnership (RFSP) Planning Grant Final Report (2021–2023).
+      </p>
+      <div class="footer__credits">
+        Data Visualization prepared for NoCo Foodshed Project via Catchafire · May 2026
+      </div>
+    </div>
+  </footer>
+
+  <!-- Export floating bar -->
+  <div class="export-bar" id="exportBar">
+    <button class="btn btn--outline btn--sm" onclick="exportToPDF()">
+      <span class="btn__icon">📄</span> Export PDF
+    </button>
+    <button class="btn btn--primary btn--sm" onclick="exportToExcel()">
+      <span class="btn__icon">📊</span> Export Excel
+    </button>
+  </div>
+
+</body>
+</html>
