@@ -253,10 +253,11 @@ const NOCO_DATA = {
         'CSA',
         'Local restaurants',
         'Distributors',
-        'Institutions (schools/hospitals)'
+        'Institutions (schools/hospitals)',
+        'Direct to Grocery & Retail'
       ],
-      percentSales: [40, 15, 10, 8, 8, 5],
-      description: '~30% through direct channels, only 13% to distributors/institutions'
+      percentSales: [40, 15, 10, 8, 8, 5, 14],
+      description: 'Donut chart representing the breakdown of producer sales across market channels.'
     },
 
     // Source: Report p.550

@@ -1159,3 +1159,75 @@ p {
   z-index: 999;
   transition: width 50ms linear;
 }
+
+/* ---------- Purpose & Insight Callouts ---------- */
+.purpose-callout {
+  background: linear-gradient(135deg, rgba(82, 183, 136, 0.12) 0%, rgba(216, 243, 220, 0.25) 100%);
+  border: 1px dashed var(--color-mint);
+  border-left: 5px solid var(--color-forest);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-2xl);
+  margin: var(--space-xl) 0 var(--space-sm);
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.purpose-callout__icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.purpose-callout__content {
+  flex: 1;
+}
+
+.purpose-callout__title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-forest);
+  margin-bottom: var(--space-xs);
+}
+
+.purpose-callout__text {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.insight-callout {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(253, 211, 77, 0.15) 100%);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--color-amber);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+.insight-callout__title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-terra);
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.insight-callout__text {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.chart-card__footnote {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  line-height: 1.4;
+  border-top: 1px dashed var(--color-border-light);
+  padding-top: var(--space-sm);
+}
+

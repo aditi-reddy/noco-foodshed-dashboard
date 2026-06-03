@@ -142,12 +142,12 @@ function renderLocalVsNationalChart() {
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Larimer County', 'Comparable Counties\n(Low)', 'Comparable Counties\n(High)', 'NoCo Foodshed\nGoal (2027)'],
+      labels: ['Larimer County (Current)', 'Missoula Co., MT', 'Boulder Co., CO', 'Madison Co., WI', 'NoCo Goal (2027)'],
       datasets: [{
-        label: '% of Ag Receipts Sold Locally',
-        data: [1, 5, 20, 10],
-        backgroundColor: [COLORS.coral, COLORS.sage, COLORS.forest, COLORS.amber],
-        borderColor: ['#DC2626', COLORS.forestLight, COLORS.forest, COLORS.terra],
+        label: '% of Regional Food Sales from Local Sources',
+        data: [1, 15, 8, 12, 10],
+        backgroundColor: [COLORS.coral, COLORS.sage, COLORS.mint, COLORS.forest, COLORS.amber],
+        borderColor: ['#DC2626', COLORS.forestLight, COLORS.forestLight, COLORS.forest, COLORS.terra],
         borderWidth: 2,
         borderRadius: 8,
         barPercentage: 0.55,
@@ -171,7 +171,7 @@ function renderLocalVsNationalChart() {
       scales: {
         x: {
           beginAtZero: true,
-          max: 25,
+          max: 18,
           ticks: {
             callback: (v) => v + '%',
             font: { size: 11 }
@@ -576,7 +576,7 @@ function renderMarketChannelsChart() {
         data: data.percentSales,
         backgroundColor: [
           COLORS.forest, COLORS.sage, COLORS.mint,
-          COLORS.amber, COLORS.sky, COLORS.purple
+          COLORS.amber, COLORS.sky, COLORS.purple, COLORS.teal
         ],
         borderWidth: 3,
         borderColor: '#FFFFFF',
@@ -721,6 +721,7 @@ function renderEventsChart() {
           borderRadius: 6,
           barPercentage: 0.7,
           categoryPercentage: 0.6,
+          yAxisID: 'y'
         },
         {
           label: 'Total Attendance',
@@ -729,6 +730,7 @@ function renderEventsChart() {
           borderRadius: 6,
           barPercentage: 0.7,
           categoryPercentage: 0.6,
+          yAxisID: 'y1'
         }
       ]
     },
@@ -750,10 +752,15 @@ function renderEventsChart() {
       },
       scales: {
         y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Number of Events',
+            font: { size: 11, weight: '600' }
+          },
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.04)' }
-        },
-        x: {
           grid: { display: false },
           ticks: { font: { size: 10 } }
         }
@@ -931,80 +938,7 @@ function renderVegOutImpactChart() {
 // SECTION 6 CHARTS: Action Plan
 // ============================================================
 
-function renderGoalAlignmentChart() {
-  const ctx = document.getElementById('chartGoalAlignment').getContext('2d');
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [
-        'Goal 1: Elevate\nMarginalized Voices',
-        'Goal 2: Increase\nFood Access',
-        'Goal 3: Consumer\nEducation',
-        'Goal 4: Support\nProducers'
-      ],
-      datasets: [
-        {
-          label: '🤲 Food Sovereignty & Access',
-          data: [1, 1, 0, 0],
-          backgroundColor: COLORS.purple,
-          borderRadius: 4,
-          barPercentage: 0.7,
-          categoryPercentage: 0.65,
-        },
-        {
-          label: '🗣️ Community Outreach & Education',
-          data: [0, 1, 1, 0],
-          backgroundColor: COLORS.amber,
-          borderRadius: 4,
-          barPercentage: 0.7,
-          categoryPercentage: 0.65,
-        },
-        {
-          label: '🌱 Production Growth & Land Access',
-          data: [0, 0, 0, 1],
-          backgroundColor: COLORS.forest,
-          borderRadius: 4,
-          barPercentage: 0.7,
-          categoryPercentage: 0.65,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'top',
-          labels: {
-            font: { size: 12, weight: '500' },
-            padding: 20,
-          }
-        },
-        datalabels: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ctx.parsed.y === 1
-              ? `${ctx.dataset.label} — Aligned`
-              : `${ctx.dataset.label} — Not primary focus`
-          }
-        }
-      },
-      scales: {
-        y: {
-          display: false,
-          max: 1.3,
-        },
-        x: {
-          grid: { display: false },
-          ticks: {
-            font: { size: 11, weight: '500' },
-          }
-        }
-      }
-    }
-  });
-}
+// Goals matrix removed
 
 // ============================================================
 // EXPORT FUNCTIONS
@@ -1239,13 +1173,10 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAspiringBarriersChart();
 
   // Section 4
-  renderEventsChart();
+  // renderEventsChart() — replaced by HTML table (see index.html Comment 12 fix)
   renderAssessmentReachChart();
 
   // Section 5
   renderPilotRevenueChart();
   renderVegOutImpactChart();
-
-  // Section 6
-  renderGoalAlignmentChart();
 });

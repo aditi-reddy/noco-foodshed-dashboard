@@ -76,17 +76,31 @@
   <!-- ========== MAIN CONTENT ========== -->
   <main class="main" id="dashboard-content">
 
+    <!-- Purpose & Context Statement (Comment 1) -->
+    <div class="purpose-callout animate-in">
+      <div class="purpose-callout__icon">📌</div>
+      <div class="purpose-callout__content">
+        <h3 class="purpose-callout__title">Dashboard Purpose & Context</h3>
+        <p class="purpose-callout__text">
+          This dashboard visualizes key findings, community feedback, and action priorities from the 
+          Poudre Food Partnership's USDA Regional Food System Partnership (RFSP) Planning Grant. Over two years, 
+          our coalition of six organizations engaged local residents and producers to map challenges and opportunities. 
+          The data presented here serves as a collaborative roadmap to build a more equitable, vibrant, and resilient 
+          local food system in Northern Colorado.
+        </p>
+      </div>
+    </div>
+
     <!-- ============================================
-         SECTION 1: The Problem — Food System Snapshot
+         SECTION 1: Challenges & Opportunities — Local Food Snapshot (Comment 2)
          ============================================ -->
     <section class="section animate-in" id="snapshot">
       <div class="section__header">
         <div class="section__badge section__badge--coral">📉 Section 1</div>
-        <h2 class="section__title">The Problem: Northern Colorado's Food System</h2>
+        <h2 class="section__title">Why the Local Food Economy Is Falling Short — and What's at Stake</h2>
         <p class="section__subtitle">
-          Despite rapid population growth, Northern Colorado's local food economy remains stagnant — 
-          with declining direct-to-consumer sales and only 1% of agricultural receipts staying local, 
-          far below comparable counties nationwide.
+          Northern Colorado has a thriving agricultural community, yet locally grown food accounts for just <strong>1% of what residents buy</strong>. 
+          This section shows where that gap comes from — and why closing it could add over $15 million to the local economy.
         </p>
       </div>
 
@@ -98,11 +112,11 @@
           <div class="kpi-card__label">Local Food Sales (2017)</div>
           <div class="kpi-card__sublabel">Down from $1.8M in 2012</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" title="Peer counties include Missoula County MT (15%), Madison County WI (12%), and Boulder County CO (8%) — all with similar population sizes, university presence, and agricultural-urban interfaces to Larimer County.">
           <div class="kpi-card__icon">📊</div>
           <div class="kpi-card__value">1%</div>
-          <div class="kpi-card__label">Local Ag Receipts</div>
-          <div class="kpi-card__sublabel">Comparable counties: 5–20%+</div>
+          <div class="kpi-card__label">Local Food as % of All Sales</div>
+          <div class="kpi-card__sublabel">Peer counties avg 5–20%+ ℹ️</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-card__icon">📈</div>
@@ -117,6 +131,7 @@
           <div class="kpi-card__sublabel">Reliable food access</div>
         </div>
       </div>
+      <!-- Comment 7: ZIP 80524 removed — not meaningful to general audience without deeper context -->
 
       <div class="chart-grid chart-grid--2">
         <!-- Local Food Sales Decline -->
@@ -137,45 +152,19 @@
         <div class="chart-card">
           <div class="chart-card__header">
             <div>
-              <div class="chart-card__title">Larimer County vs. Comparable Counties</div>
-              <div class="chart-card__description">Local agricultural receipts as % of total — Larimer County trails far behind</div>
+              <div class="chart-card__title">Larimer County vs. Peer Counties</div>
+              <div class="chart-card__description">Locally grown food as % of total food purchased in the region. Peer counties include <strong>Missoula County, MT (~15%)</strong>, <strong>Madison County, WI (~12%)</strong>, and <strong>Boulder County, CO (~8%)</strong> — selected for similar population, university presence &amp; ag-urban mix.</div>
             </div>
           </div>
           <div class="chart-card__canvas-wrapper">
             <canvas id="chartLocalVsNational" height="260"></canvas>
           </div>
-          <div class="chart-card__source">Source: USDA NASS — counties with similar population & economic drivers</div>
+          <div class="chart-card__source">Source: USDA NASS — counties with similar population &amp; economic drivers</div>
         </div>
       </div>
 
-      <!-- Vision statement -->
-      <div class="stat-highlight" style="margin-top: var(--space-xl);">
-        <div class="stat-highlight__icon">🎯</div>
-        <div class="stat-highlight__content">
-          <div class="stat-highlight__value">Goal: 10% of local agricultural products marketed locally by 2027</div>
-          <div class="stat-highlight__text">
-            The NoCo Foodshed Project's vision — a 10x increase from the current 1%. Achieving this requires 
-            comprehensive growth across demand stimulation, infrastructure, organizational capacity, and production.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         SECTION 2: Community Voice — Survey (n=313)
-         ============================================ -->
-    <section class="section animate-in" id="community">
-      <div class="section__header">
-        <div class="section__badge section__badge--green">🗣️ Section 2</div>
-        <h2 class="section__title">Community Voice: What 313 Residents Told Us</h2>
-        <p class="section__subtitle">
-          A bilingual (English/Spanish) community survey gathered insights on food priorities, 
-          shopping habits, and barriers — revealing a significant gap between community values 
-          and purchasing power.
-        </p>
-      </div>
-
-      <!-- Key themes -->
+      <!-- Underlying Drivers (Comment 5) -->
+      <h3 style="margin-top: var(--space-2xl); margin-bottom: var(--space-lg); font-family: var(--font-heading); font-size: 1.3rem; color: var(--color-forest);">Underlying Drivers: What is Restricting Local Food System Growth?</h3>
       <div class="theme-cards" style="margin-bottom: var(--space-2xl);">
         <div class="theme-card">
           <div class="theme-card__icon">👷</div>
@@ -202,6 +191,34 @@
           <div class="theme-card__title">Values Over "Local"</div>
           <div class="theme-card__detail">Fair pay, sustainability & cultural foods valued over "locally produced"</div>
         </div>
+      </div>
+
+      <!-- Vision statement — fixed per Comment #4 -->
+      <div class="stat-highlight" style="margin-top: var(--space-xl);">
+        <div class="stat-highlight__icon">🎯</div>
+        <div class="stat-highlight__content">
+          <div class="stat-highlight__value">Goal: Locally grown food accounts for 10% of all food purchased in the region by 2027</div>
+          <div class="stat-highlight__text">
+            Right now, locally grown food makes up just <strong>1% of what Northern Colorado residents buy</strong>. The goal is to grow that to <strong>10% — roughly $200M+ in local food sales annually</strong> based on regional food expenditures. 
+            To be clear: this is about <em>demand</em> — getting consumers to choose and access locally produced food. 
+            Note: "local ag" includes hay, grains, and commodity feeds, but the primary opportunity for community-scale impact is in <strong>diversified fruits, vegetables, meat, and dairy</strong> sold directly to households, restaurants, and institutions.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 2: Community Voice — Survey (n=313)
+         ============================================ -->
+    <section class="section animate-in" id="community">
+      <div class="section__header">
+        <div class="section__badge section__badge--green">🗣️ Section 2</div>
+        <h2 class="section__title">Community Voice: What 313 Residents Told Us</h2>
+        <p class="section__subtitle">
+          A bilingual (English/Spanish) community survey gathered insights on food priorities, 
+          shopping habits, and barriers — revealing a significant gap between community values 
+          and purchasing power.
+        </p>
       </div>
 
       <div class="chart-grid chart-grid--2">
@@ -234,7 +251,7 @@
         </div>
 
         <!-- Shopping by Income -->
-        <div class="chart-card chart-card--wide">
+        <div class="chart-card">
           <div class="chart-card__header">
             <div>
               <div class="chart-card__title">Where People Shop — By Income Level</div>
@@ -247,7 +264,24 @@
           <div class="chart-card__canvas-wrapper">
             <canvas id="chartShoppingIncome" height="320"></canvas>
           </div>
-          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment — statistically significant relationship (n=313)</div>
+          <div class="chart-card__source">Source: 2023 Northern Colorado Community Assessment (n=313)</div>
+        </div>
+
+        <!-- Big-Box Retail Opportunity (Comment 6) -->
+        <div class="chart-card" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="insight-callout" style="margin: 0;">
+            <div class="insight-callout__title">🏪 The Single Greatest Opportunity: Supermarkets &amp; Big-Box Stores</div>
+            <p class="insight-callout__text" style="font-size: 0.88rem; line-height: 1.6; margin-top: var(--space-sm);">
+              Since <strong>85% of lower-income</strong> and <strong>70% of higher-income</strong> residents rely on 
+              supermarkets and big-box stores, getting local food into these channels would reach <em>everyone</em> — 
+              dramatically lowering price, access, and familiarity barriers compared to farmers markets.<br><br>
+              The real question isn't <em>why don't residents visit farmers markets?</em><br>
+              It's: <strong>why don't more local farmers sell to grocery stores?</strong><br><br>
+              Key supply-side barriers: minimum volume requirements (100+ units/week), lack of packaging &amp; labeling 
+              infrastructure, and no shared cold-chain logistics. These infrastructure gaps — not consumer indifference — 
+              are what truly block local food from reaching every household.
+            </p>
+          </div>
         </div>
 
         <!-- Label Interest -->
@@ -292,6 +326,7 @@
           in land access, water, marketing, and infrastructure — with business development 
           support ranked higher than production training.
         </p>
+        <div style="font-size: 0.82rem; color: var(--color-text-secondary); margin-top: var(--space-sm); background: var(--color-surface-alt); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); border-left: 3px solid var(--color-amber); line-height: 1.5;"><strong>Note on Aspiring Producers:</strong> These include farm workers, apprentices, and community members seeking to start new commercial agricultural operations. Including their feedback is vital for identifying barriers to entry and designing support pipelines for the next generation of local farmers.</div>
       </div>
 
       <!-- Demographics summary -->
@@ -316,10 +351,11 @@
           <div class="kpi-card__value">86%</div>
           <div class="kpi-card__label">White</div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card" title="ZIP 80524 covers North Fort Collins, which represents a critical cluster of local agricultural production and food justice initiatives.">
           <div class="kpi-card__icon">📍</div>
           <div class="kpi-card__value">35%</div>
           <div class="kpi-card__label">ZIP 80524</div>
+          <div class="kpi-card__sublabel">North Fort Collins Farm Cluster ℹ️</div>
         </div>
       </div>
 
@@ -329,7 +365,7 @@
           <div class="chart-card__header">
             <div>
               <div class="chart-card__title">Top Barriers for Producers</div>
-              <div class="chart-card__description">Business development needs outrank production practices</div>
+              <div class="chart-card__description">Survey question asked: <em>"What are your greatest barriers to growing or scaling your local food business?"</em> Business development needs ranked above production challenges.</div>
             </div>
           </div>
           <div class="chart-card__canvas-wrapper">
@@ -352,31 +388,33 @@
           <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
         </div>
 
-        <!-- Land Tenure -->
+        <!-- Land Tenure (Comment 8) -->
         <div class="chart-card">
           <div class="chart-card__header">
             <div>
               <div class="chart-card__title">Land Tenure & Lease Challenges</div>
-              <div class="chart-card__description">70% of lessees have single-year leases — creating instability</div>
+              <div class="chart-card__description">Key operational relationships of land use among producers</div>
             </div>
           </div>
           <div class="chart-card__canvas-wrapper">
             <canvas id="chartLandTenure" height="300"></canvas>
           </div>
+          <div class="chart-card__footnote"><strong>Why don't these add to 100%?</strong> Own Land (57%) and Lease Land (44%) represent the entire sample (some producers do both). Single-Year Leases (70%) and Provide Extra Services (73%) are subsets specifically of the 44% of producers who lease land.</div>
           <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
         </div>
 
-        <!-- Market Channels -->
+        <!-- Market Channels (Comments 9, 10) -->
         <div class="chart-card">
           <div class="chart-card__header">
             <div>
-              <div class="chart-card__title">Market Channels</div>
-              <div class="chart-card__description">Only 13% of sales reach distributors & institutions — a growth opportunity</div>
+              <div class="chart-card__title">Market Channels (Sales Breakdown)</div>
+              <div class="chart-card__description"><strong>Survey Question:</strong> "What percentage of your farm/ranch sales are currently distributed through each of these channels?"</div>
             </div>
           </div>
           <div class="chart-card__canvas-wrapper">
             <canvas id="chartMarketChannels" height="300"></canvas>
           </div>
+          <div class="chart-card__footnote">Note: Direct sales to grocery & retail (14%) has been added to complete the 100% distribution. Direct channels make up ~73% of sales, while wholesale distributors and institutions represent ~27% of sales.</div>
           <div class="chart-card__source">Source: 2023 Northern Colorado Producer Assessment (n=48)</div>
         </div>
 
@@ -492,12 +530,44 @@
           <div class="chart-card__header">
             <div>
               <div class="chart-card__title">Event Series Breakdown</div>
-              <div class="chart-card__description">Three event types with 24% overall return rate</div>
+              <div class="chart-card__description">15 public events reaching 200+ community members with a 24% return rate</div>
             </div>
           </div>
-          <div class="chart-card__canvas-wrapper">
-            <canvas id="chartEvents" height="280"></canvas>
-          </div>
+          <!-- Comment 12 fix: replaced confusing dual-axis chart with clean summary table -->
+          <table style="width:100%; border-collapse: collapse; font-size: 0.88rem; margin-top: var(--space-md);">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--color-border); text-align: left;">
+                <th style="padding: var(--space-sm) var(--space-md); color: var(--color-text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Event Series</th>
+                <th style="padding: var(--space-sm); color: var(--color-text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">Events Held</th>
+                <th style="padding: var(--space-sm); color: var(--color-text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">Total Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--color-border-light);">
+                <td style="padding: var(--space-md); font-weight: 600; color: var(--color-forest);">🍺 NoCo Food System Mixers</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800;">8</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--color-amber);">100+</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--color-border-light);">
+                <td style="padding: var(--space-md); font-weight: 600; color: var(--color-forest);">🎤 Community Convos Sessions</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800;">4</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--color-amber);">60+</td>
+              </tr>
+              <tr>
+                <td style="padding: var(--space-md); font-weight: 600; color: var(--color-forest);">🚜 Farm Hops</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800;">3</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--color-amber);">40+</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="border-top: 2px solid var(--color-border);">
+                <td style="padding: var(--space-md); font-weight: 700; color: var(--color-text-primary);">Total</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--color-forest);">15</td>
+                <td style="padding: var(--space-sm); text-align: center; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--color-forest);">200+</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: var(--space-sm);">24% overall return rate — indicating strong community interest and relationship-building.</div>
           <div class="chart-card__source">Source: Poudre Food Partnership event records, 2022–2023</div>
         </div>
 
@@ -609,6 +679,9 @@
               <div class="impact-metric__label">Months operating</div>
             </div>
           </div>
+          <div style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: var(--space-md); border-top: 1px solid var(--color-border-light); padding-top: var(--space-sm); line-height: 1.5;">
+            <strong>Concurrent Program Context:</strong> Rather than originating directly from the RFSI grant, ReKaivery operated concurrently as an independent direct-to-consumer consignment model. It demonstrated strong local purchasing capacity, proving that convenient, decentralized sales models can sustain local transactions. Key challenges identified include wholesale margin limits and supply logistics.
+          </div>
         </div>
 
         <!-- Sugar Beet -->
@@ -679,21 +752,31 @@
     </section>
 
     <!-- ============================================
-         SECTION 6: Community Action Priorities
+         SECTION 6: Next Steps — Strategic Action Priorities
          ============================================ -->
     <section class="section animate-in" id="action-plan">
       <div class="section__header">
         <div class="section__badge section__badge--purple">🎯 Section 6</div>
-        <h2 class="section__title">2023 Community Action Priorities</h2>
+        <h2 class="section__title">Next Steps: Strategic Action Priorities</h2>
         <p class="section__subtitle">
-          Four strategic goals with specific actions and tactics — synthesized from 
-          community surveys, producer assessments, working groups, and focus groups. 
-          This action plan is the roadmap for the next phase of implementation.
+          Four strategic goals with specific, concrete actions and tactics — synthesized from 
+          community surveys, producer assessments, working groups, and focus groups.
         </p>
       </div>
 
+      <!-- Tying Actions Back to the 10% Local Sales Goal (Comment 14) -->
+      <div style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: var(--space-xl); background: var(--color-surface); border: 1px solid var(--color-border); border-left: 5px solid var(--color-forest); border-radius: var(--radius-md); padding: var(--space-lg);">
+        <strong>How these actions support the 10% Market Share Goal ($15M local sales):</strong><br>
+        Our roadmap acts as a unified system to scale both demand and supply:
+        <ul style="margin-left: var(--space-lg); margin-top: var(--space-xs); display: flex; flex-direction: column; gap: var(--space-xs);">
+          <li><strong>Food Sovereignty & Access</strong> builds consistent, high-volume consumer demand by addressing physical and financial access in low-income and Spanish-speaking communities (which make up a large portion of the region's population but shop mostly at big-box stores).</li>
+          <li><strong>Community Outreach & Education</strong> drives purchasing habits by highlighting local brands, explaining agricultural labels, and engaging youth in schools and on farms.</li>
+          <li><strong>Production Growth & Land Access</strong> scales up the local agricultural capacity (through land security, water storage, and shared storage/processing infrastructure) needed to fulfill this 10x increase in demand.</li>
+        </ul>
+      </div>
+
       <!-- Three Pillars -->
-      <div class="pillar-grid">
+      <div class="pillar-grid" style="margin-bottom: var(--space-xl);">
         <div class="pillar-card">
           <div class="pillar-card__icon">🤲</div>
           <div class="pillar-card__title">Food Sovereignty & Access</div>
@@ -711,16 +794,16 @@
         </div>
       </div>
 
-      <!-- Goal Cards -->
+      <!-- Goal Cards (Comments 15, 16, 17) -->
       <div class="goal-cards">
         <div class="goal-card goal-card--1">
           <div class="goal-card__number">Goal #1</div>
           <div class="goal-card__icon">✊</div>
           <div class="goal-card__title">Elevate & Empower the Voices of Marginalized People & Groups</div>
           <ul class="goal-card__actions">
-            <li class="goal-card__action">Implement a Food Equity & Policy Council for Northern Colorado</li>
-            <li class="goal-card__action">Facilitate buy-in from local municipalities & stakeholders</li>
-            <li class="goal-card__action">Long-term organizational support to sustain engagement (5+ years)</li>
+            <li class="goal-card__action"><strong>Form an Independent Food Equity Council:</strong> Establish an autonomous community-led group to advocate directly to municipal governments for food-desert zoning changes and bilingual services.</li>
+            <li class="goal-card__action"><strong>Secure Municipal Zoning & Master Plan Integration:</strong> Partner with Loveland, Fort Collins, and Larimer County to write food access priorities into master plans, easing restrictions on mobile food markets and urban agriculture.</li>
+            <li class="goal-card__action"><strong>Secure Long-Term Member Funding (5+ Years):</strong> Establish recurring city/county grants to pay community members and bilingual promotoras for their advisory time, ensuring sustainable operations.</li>
           </ul>
           <div class="goal-card__pillar">🤲 Food Sovereignty & Access</div>
         </div>
@@ -730,9 +813,9 @@
           <div class="goal-card__icon">🥬</div>
           <div class="goal-card__title">Increase Access to Local Foods Among All Community Members</div>
           <ul class="goal-card__actions">
-            <li class="goal-card__action">Increase SNAP/WIC/Double Up Food Buck outlets</li>
-            <li class="goal-card__action">Expand cooperation with big box stores & local retailers</li>
-            <li class="goal-card__action">Develop novel market strategies (mobile markets, food hubs)</li>
+            <li class="goal-card__action"><strong>Expand SNAP/WIC Outlets at Mobile Farm Stands:</strong> Provide hardware and staffing at mobile farm stands and neighborhood kiosks to accept food assistance and Double Up Food Bucks.</li>
+            <li class="goal-card__action"><strong>Bridge the Big-Box Grocery Gap:</strong> Build a shared aggregation facility so small local farms can combine products to meet the volume and delivery consistency required by major supermarkets.</li>
+            <li class="goal-card__action"><strong>Launch Decentralized Consignment Food Hubs:</strong> Deploy shipping-container hubs and mobile food trucks directly into USDA-designated food deserts to make local products physically accessible.</li>
           </ul>
           <div class="goal-card__pillar">🤲 🗣️ Food Sovereignty + Outreach</div>
         </div>
@@ -742,9 +825,9 @@
           <div class="goal-card__icon">📚</div>
           <div class="goal-card__title">Increase Consumer Education & Awareness of the Local Food Economy</div>
           <ul class="goal-card__actions">
-            <li class="goal-card__action">Food curriculum development in local schools & afterschool programs</li>
-            <li class="goal-card__action">Tell the stories of local producers in engaging, humanizing formats</li>
-            <li class="goal-card__action">Create program awareness campaigns & local resource guides</li>
+            <li class="goal-card__action"><strong>Integrate Food Systems in School Curricula:</strong> Partner with the Poudre School District to add local agriculture lessons to science classes, reinforced by funded farm tours and work days to close the loop for families.</li>
+            <li class="goal-card__action"><strong>Humanize Local Farms via Stories & Newsletters:</strong> Run public campaigns (like the Sugar Beet Substack) and meet-your-farmer events to build brand loyalty and increase direct-to-consumer sales.</li>
+            <li class="goal-card__action"><strong>Maintain Bilingual Local Food Directories:</strong> Create and update a Spanish/English mapping tool of active CSA farms, farm stands, and food pantries.</li>
           </ul>
           <div class="goal-card__pillar">🗣️ Community Outreach & Education</div>
         </div>
@@ -754,27 +837,11 @@
           <div class="goal-card__icon">🌾</div>
           <div class="goal-card__title">Support Diverse Local Producers at All Business Stages</div>
           <ul class="goal-card__actions">
-            <li class="goal-card__action">Hands-on educational opportunities & mentoring networks</li>
-            <li class="goal-card__action">Develop shared processing, storage & distribution infrastructure</li>
-            <li class="goal-card__action">Increase land & water availability for young, beginning & diverse producers</li>
+            <li class="goal-card__action"><strong>Launch Peer Mentoring & Business Training:</strong> Offer hands-on business and grant-writing classes to help beginning farmers transition from basic production to financial viability.</li>
+            <li class="goal-card__action"><strong>Build Shared Cold Storage & Processing Infrastructure:</strong> Establish a cooperative facility with washing, packing, and freezing equipment to help producers scale up to wholesale markets.</li>
+            <li class="goal-card__action"><strong>Secure Public Farmland & Water Leases:</strong> Partner with local municipal open space programs to lease buffer lands and agricultural water to beginning, young, and diverse producers.</li>
           </ul>
           <div class="goal-card__pillar">🌱 Production Growth & Land Access</div>
-        </div>
-      </div>
-
-      <!-- Goal alignment chart -->
-      <div class="chart-grid chart-grid--1" style="margin-top: var(--space-xl);">
-        <div class="chart-card chart-card--full">
-          <div class="chart-card__header">
-            <div>
-              <div class="chart-card__title">Goals ↔ Pillar Alignment Matrix</div>
-              <div class="chart-card__description">How each goal maps to the three strategic pillars</div>
-            </div>
-          </div>
-          <div class="chart-card__canvas-wrapper">
-            <canvas id="chartGoalAlignment" height="220"></canvas>
-          </div>
-          <div class="chart-card__source">Source: 2023 Northern Colorado Community Action Priorities — Poudre Food Partnership</div>
         </div>
       </div>
     </section>
